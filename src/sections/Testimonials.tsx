@@ -3,6 +3,9 @@ import memojiAvatar2 from "@/assets/images/memoji-avatar-2.png";
 import memojiAvatar3 from "@/assets/images/memoji-avatar-3.png";
 import memojiAvatar4 from "@/assets/images/memoji-avatar-4.png";
 import memojiAvatar5 from "@/assets/images/memoji-avatar-5.png";
+import graintImage from "@/assets/images/grain.jpg";
+import SectionHeader from "@/components/SectionHeader";
+import Image from "next/image";
 
 const testimonials = [
   {
@@ -38,5 +41,36 @@ const testimonials = [
 ];
 
 export const TestimonialsSection = () => {
-  return <div>Testimonials Section</div>;
+  return (
+    <div className="py-16">
+      <SectionHeader
+        eyebrow="Happy clients"
+        describtion="Don't just take my word for it. See what clients have to say about my
+        work."
+        title="How Clients Say About Me"
+      />
+      <div>
+        {testimonials.map((testimonial) => (
+          <div
+            key={testimonial.name}
+            className="bg-gray-800 rounded-3xl p-6 relative overflow-hidden z-50"
+          >
+            <div
+              className="absolute inset-0 opacity-5 -z-10"
+              style={{
+                backgroundImage: `url(${graintImage.src})`,
+              }}
+            ></div>
+            <Image
+              src={testimonial.avatar}
+              alt={testimonial.name + " avatar"}
+            />
+            <div>{testimonial.name}</div>
+            <div>{testimonial.position}</div>
+            <p>{testimonial.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
