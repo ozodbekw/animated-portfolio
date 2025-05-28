@@ -43,7 +43,7 @@ const testimonials = [
 
 export const TestimonialsSection = () => {
   return (
-    <div className="py-16 lg:py-24">
+    <section className="py-16 lg:py-24">
       <SectionHeader
         eyebrow="Happy clients"
         describtion="Don't just take my word for it. See what clients have to say about my
@@ -79,6 +79,6 @@ export const TestimonialsSection = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
