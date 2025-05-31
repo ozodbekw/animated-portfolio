@@ -1,3 +1,4 @@
+import { transcode } from "buffer";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -24,6 +25,17 @@ const config: Config = {
       fontFamily: {
         sans: "var(--font-sans)",
         sarif: "var(--font-sarif)",
+      },
+      animation: {
+        "ping-large": "ping-large 1s ease-in-out infinite",
+      },
+      keyframes: {
+        "ping-large": {
+          "75%, 100%": {
+            transform: "scale(3)",
+            opacity: "0",
+          },
+        },
       },
     },
   },
