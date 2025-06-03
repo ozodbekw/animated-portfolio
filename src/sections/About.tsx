@@ -1,13 +1,15 @@
+"use client";
 import Image from "next/image";
+
+// framer motion
+import { motion } from "framer-motion";
 
 // components
 import Card from "@/components/Card";
 import SectionHeader from "@/components/SectionHeader";
-import TagIcon from "@/components/TagIcon";
 
 // images
 import BookImage from "@/assets/images/book-cover.png";
-import StarIcon from "@/assets/icons/star.svg";
 import JavascriptIcon from "@/assets/icons/square-js.svg";
 import HtmlIcon from "@/assets/icons/html5.svg";
 import CssIcon from "@/assets/icons/css3.svg";
@@ -18,6 +20,7 @@ import MapImage from "@/assets/images/map.png";
 import SmileMemoji from "@/assets/images/memoji-smile.png";
 import CardHeader from "@/components/CardHeader";
 import ToolbosItems from "@/components/ToolbosItems";
+import { useRef } from "react";
 
 const toolboxItems = [
   {
@@ -92,6 +95,7 @@ const hobbies = [
 ];
 
 export const AboutSection = () => {
+  const constrainRef = useRef(null);
   return (
     <section id="about" className="pb-20 lg:py-28">
       <div className="container">
@@ -117,11 +121,15 @@ export const AboutSection = () => {
                 describtion="Explore the technologies and tools I use to create digital
                 experience."
               />
-              <ToolbosItems className="" items={toolboxItems} />
+              <ToolbosItems
+                className=""
+                items={toolboxItems}
+                itemsWrapperClassName="animate-move-left [animation-duration:30s]"
+              />
               <ToolbosItems
                 className="mt-6"
                 items={toolboxItems}
-                itemsWrapperClassName="-translate-x-1/2"
+                itemsWrapperClassName="-translate-x-1/2 animate-move-right [animation-duration:15s]"
               />
             </Card>
           </div>
@@ -132,21 +140,23 @@ export const AboutSection = () => {
                 describtion="Explore my interests and hobbies beyong the degital relm."
                 className="px-6 py-6"
               />
-              <div className="relative flex-1">
+              <div className="relative flex-1" ref={constrainRef}>
                 {hobbies.map((hobby) => (
-                  <div
+                  <motion.div
                     key={hobby.title}
                     className="inline-flex absolute items-center gap-2 px-6 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full py-1.5"
                     style={{
                       left: hobby.left,
                       top: hobby.top,
                     }}
+                    drag
+                    dragConstraints={constrainRef}
                   >
                     <span className="font-medium text-gray-950">
                       {hobby.title}
                     </span>
                     <span>{hobby.emoji}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </Card>
@@ -156,7 +166,9 @@ export const AboutSection = () => {
                 alt="map image"
                 className="h-full w-full object-cover object-left-top"
               />
-              <div className="absolute rounded-full bg-gradient-to-r from-emerald-300 to-sky-400 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 after:content-[''] after:absolute after:inset-0 after:outline after:outline-2 after:-outline-offset-2 after:rounded-full after:outline-gray-950/30">
+              <div className="absolute rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 after:content-[''] after:absolute after:inset-0 after:outline after:outline-2 after:-outline-offset-2 after:rounded-full after:outline-gray-950/30">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-300 to-sky-400 -z-10 animate-ping [animation-duration:2s]"></div>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-300 to-sky-400 -z-10"></div>
                 <Image
                   className="size-20"
                   src={SmileMemoji}
